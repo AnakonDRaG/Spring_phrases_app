@@ -1,0 +1,3 @@
+[submodule "Spring_phrases_client"]
+	path = Spring_phrases_client
+	url = https://github.com/AnakonDRaG/Spring_phrases_client
