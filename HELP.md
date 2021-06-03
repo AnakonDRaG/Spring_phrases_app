@@ -1,4 +1,12 @@
-# Getting Started
+# Server application of catch-phrases
+
+- Spring
+- Gradle
+- CRUD
+- Rest-app
+- JWT - auth
+
+
 
 ### Reference Documentation
 For further reference, please consider the following sections:
