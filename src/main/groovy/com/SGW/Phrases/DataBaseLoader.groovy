@@ -20,7 +20,7 @@ class DataBaseLoader implements CommandLineRunner{
     }
     @Override
     void run(String... args) throws Exception {
-
+ /*
         authorRepository.save(new Author(FirstName: "Unknown"))
         authorRepository.save(new Author(FirstName: "Амелия", LastName: "Эрхарт"))
 
@@ -32,5 +32,7 @@ class DataBaseLoader implements CommandLineRunner{
                 Title:"Drive Me Nuts",
                 Meaning: "To greatly frustrate someone. To drive someone crazy, insane, bonkers, or bananas."
         ))
+
+  */
     }
 }
