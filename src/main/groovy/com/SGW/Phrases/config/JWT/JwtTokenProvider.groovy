@@ -36,8 +36,8 @@ class JwtTokenProvider {
     String createToken(User user) {
         Claims claims = Jwts.claims()
         setClaims(claims, user)
-        //claims.setExpiration(Date.from(ZonedDateTime.now().plusMinutes(validityInMinutes).toInstant()))
-        claims.setExpiration(Date.from(ZonedDateTime.now().plusSeconds(validityInMinutes).toInstant()))
+        claims.setExpiration(Date.from(ZonedDateTime.now().plusMinutes(validityInMinutes).toInstant()))
+
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -80,21 +80,12 @@ class JwtTokenProvider {
     }
 
     Claims getAllClaimsFromToken(String token) {
-        Claims claims;
-        try {
-            claims = Jwts.parserBuilder().setSigningKey(secret).build().parse(token).getBody() as Claims
-        } catch (Exception e) {
-            claims = null;
-        }
-        return claims;
+        return Jwts.parserBuilder()
+                .setSigningKey(secret)
+                .build().parseClaimsJws(token).getBody()
     }
 
-    private List<String> getRoleNames(List<Role> userRoles) {
-        List<String> result = new ArrayList<>();
-        userRoles.each {role ->   result.add(role.getName())}
 
-        return result;
-    }
 
     private void setClaims(Claims claims, User user) {
         claims.setSubject(user.getEmail())

@@ -9,6 +9,7 @@ import com.SGW.Phrases.repositories.RefreshTokenRepository
 import com.SGW.Phrases.repositories.RoleRepository
 import com.SGW.Phrases.repositories.UserRepository
 import io.jsonwebtoken.Claims
+import io.jsonwebtoken.JwtParser
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -50,18 +51,13 @@ class AuthUserController {
     def userReAuth(@RequestParam(value = "accessToken") String accessToken,
                    @RequestParam(value = "refreshToken") String refreshToken) {
 
-        println(jwtTokenProvider.validateToken(accessToken))
-        Claims accessTokenDecoded = jwtTokenProvider.getAllClaimsFromToken(accessToken)
+
         Claims refreshTokenDecoded = jwtTokenProvider.getAllClaimsFromToken(refreshToken)
 
 
-        return ""
-        println(accessTokenDecoded.getSubject())
         User user = userRepository.findById(refreshTokenDecoded.getSubject().toLong()).get()
 
-        if (accessTokenDecoded.getSubject() != refreshTokenDecoded.getSubject()
-                || refreshToken.isEmpty()
-                || refreshToken == null
+        if (!jwtTokenProvider.validateToken(refreshToken) || refreshToken.isEmpty() || refreshToken == null
         ) {
             def _token = refreshTokenRepository.findByUser(user)
             _token.setToken(null)
