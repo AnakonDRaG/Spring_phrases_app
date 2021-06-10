@@ -21,11 +21,6 @@ class Phrase {
     String Title;
     String Meaning;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "Category_ID")
-    //Category Category;
-
-
     @ManyToOne
     @JoinColumn(name = "Author_ID")
     Author Author;

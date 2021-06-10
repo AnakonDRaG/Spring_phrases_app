@@ -9,7 +9,6 @@ class ApiResponse {
     }
 
 
-
     static def SuccessMessage(def message, def resources, int status = 200) {
         return [success: message, resources: resources, status: status]
     }
